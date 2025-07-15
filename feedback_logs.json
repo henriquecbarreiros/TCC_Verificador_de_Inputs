@@ -1,0 +1,25 @@
+{
+  "feedbacks": [
+    {
+      "timestamp": "2025-06-14 15:38:33",
+      "tipo": "correcao",
+      "feedback": "RELAÇÃO_SOFTWARE_REGIAO deveria ser FAIL. Motivo: VHQZ1-09 não é compativel com Japan",
+      "resultado_original": "RESULTADOS:\n- HARDWARE: PASS [Hardware_A]\n- SOFTWARE: PASS [VHQZ1-09]\n- RELAÇÃO_SOFTWARE_REGIAO: PASS [VHQZ1-09/Japan]\n- VERSAO_ANDROID: PASS [Android 14]\n- WIFI: PASS [5GHz]\n- NFC: PASS [Yes]\n- BLUETOOTH: PASS [5.0+]\n- SIM: PASS [Dual SIM]\n- REDE: PASS [6G]",
+      "resposta_api": "Feedback (Correção de resultado incorreto) enviado com sucesso!\nResposta: RESPOSTA:\nCorreção aplicada. Atualizando resultado:\n\nRELAÇÃO_SOFTWARE_REGIAO: FAIL [VHQZ1-09/Japan - Incompatível]"
+    },
+    {
+      "timestamp": "2025-07-08 18:04:19",
+      "tipo": "correcao",
+      "feedback": "Wifi deveria ter dado pass, pois tem a informação esperada, 2.4GHz",
+      "resultado_original": "RESULTADOS:\n- HARDWARE: PASS [Hardware_A]\n- SOFTWARE: PASS [TREVAN-VS7]\n- RELAÇÃO_SOFTWARE_REGIAO: PASS [Germany] \n- VERSAO_ANDROID: PASS [Android 15]\n- WIFI: FAIL [2.4GHz] → Esperado: [\"2.4GHz\", \"5GHz\"]\n- NFC: PASS [true]\n- BLUETOOTH: FAIL [4.0] → Esperado: \"5.0+\"\n- SIM: FAIL [Single SIM] → Esperado: \"Dual SIM\"\n- REDE: FAIL [8G] → Esperado: [\"4G\", \"5G\", \"6G\"]",
+      "resposta_api": "Feedback (Correção de resultado incorreto) enviado com sucesso!\nResposta: Você está correto. O resultado do WIFI deve ser PASS, pois \"2.4GHz\" está entre os valores esperados [\"2.4GHz\", \"5GHz\"]. Vou corrigir:\n\n- WIFI: PASS [2.4GHz]"
+    },
+    {
+      "timestamp": "2025-07-14 19:17:29",
+      "tipo": "duvida",
+      "feedback": "Porque deu errado a rede mesmo?",
+      "resultado_original": "RESULTADOS:\n- HARDWARE: PASS [Hardware_A]\n- SOFTWARE: PASS [TREVAN-VS7]\n- RELAÇÃO_SOFTWARE_REGIAO: PASS [Germany] \n- VERSAO_ANDROID: PASS [Android 15]\n- WIFI: PASS [2.4GHz]\n- NFC: PASS [true]\n- BLUETOOTH: FAIL [5.0+] (Valor do input: 4.0)\n- SIM: FAIL [Dual SIM] (Valor do input: Single SIM)\n- REDE: FAIL [4G, 5G, 6G] (Valor do input: 8G)",
+      "resposta_api": "Feedback (Dúvida sobre o resultado) enviado com sucesso!\nResposta: O teste de REDE falhou porque o valor esperado era \"4G, 5G, 6G\", mas o input recebido foi \"8G\". Atualmente, 8G não é um padrão de rede móvel válido ou suportado, por isso o resultado foi FAIL.  \n\nSe houver um engano no input ou no critério, por favor revise os dados ou os requisitos do teste."
+    }
+  ]
+}

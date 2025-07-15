@@ -1,0 +1,328 @@
+{
+  "Hardware_A": {
+    "Softwares": [
+      "TREVAN-VS1",
+      "UREVAN-VS2",
+      "VREVAN-VS3",
+      "TREVAN-VS4",
+      "UREVAN-VS5",
+      "VREVAN-VS6",
+      "TREVAN-VS7",
+      "UREVAN-VS8",
+      "VREVAN-VS9",
+      "TREVAN-VS10"
+    ],
+    "Regioes": {
+      "Australia": [
+        "UREVAN-VS2",
+        "UREVAN-VS5",
+        "VREVAN-VS6",
+        "VREVAN-VS9",
+        "TREVAN-VS10"
+      ],
+      "Brazil": [
+        "TREVAN-VS1",
+        "TREVAN-VS4",
+        "UREVAN-VS5",
+        "TREVAN-VS7"
+      ],
+      "Canada": [
+        "TREVAN-VS1",
+        "TREVAN-VS4",
+        "UREVAN-VS5"
+      ],
+      "France": [
+        "TREVAN-VS7",
+        "TREVAN-VS10"
+      ],
+      "Germany": [
+        "UREVAN-VS2",
+        "VREVAN-VS3",
+        "UREVAN-VS5",
+        "TREVAN-VS7"
+      ],
+      "India": [
+        "TREVAN-VS1",
+        "UREVAN-VS2",
+        "VREVAN-VS3",
+        "UREVAN-VS8",
+        "VREVAN-VS9",
+        "TREVAN-VS10"
+      ],
+      "Japan": [
+        "TREVAN-VS1",
+        "VREVAN-VS3",
+        "VREVAN-VS6",
+        "TREVAN-VS7",
+        "UREVAN-VS8",
+        "TREVAN-VS10"
+      ],
+      "Mexico": [
+        "TREVAN-VS1",
+        "UREVAN-VS2",
+        "VREVAN-VS3",
+        "TREVAN-VS4",
+        "VREVAN-VS6",
+        "TREVAN-VS7",
+        "VREVAN-VS9"
+      ],
+      "South Africa": [
+        "TREVAN-VS1",
+        "VREVAN-VS3",
+        "TREVAN-VS7",
+        "UREVAN-VS8",
+        "TREVAN-VS10"
+      ],
+      "USA": [
+        "VREVAN-VS3",
+        "UREVAN-VS5",
+        "UREVAN-VS8",
+        "TREVAN-VS10"
+      ]
+    },
+    "Androids_disponiveis": [
+      "Android 13",
+      "Android 14",
+      "Android 15"
+    ],
+    "Android_mais_recente": "Android 16",
+    "Tecnologias_suportadas": {
+      "NFC": true,
+      "WiFi": [
+        "2.4GHz",
+        "5GHz"
+      ],
+      "Rede": [
+        "4G",
+        "5G",
+        "6G"
+      ],
+      "Bluetooth": "5.0+",
+      "SIM": "Dual SIM"
+    }
+  },
+  "Hardware_B": {
+    "Softwares": [
+      "TMAUL-VS1",
+      "UMAUL-VS2",
+      "VMAUL-VS3",
+      "TMAUL-VS4",
+      "UMAUL-VS5",
+      "VMAUL-VS6",
+      "TMAUL-VS7",
+      "UMAUL-VS8",
+      "VMAUL-VS9",
+      "TMAUL-VS10"
+    ],
+    "Regioes": {
+      "Brazil": [
+        "TMAUL-VS4",
+        "VMAUL-VS6",
+        "VMAUL-VS9",
+        "VMAUL-VS3"
+      ],
+      "USA": [
+        "TMAUL-VS1",
+        "TMAUL-VS7",
+        "VMAUL-VS6"
+      ],
+      "Germany": [
+        "TMAUL-VS7",
+        "TMAUL-VS4",
+        "VMAUL-VS3",
+        "VMAUL-VS6",
+        "TMAUL-VS10",
+        "UMAUL-VS2",
+        "UMAUL-VS8"
+      ]
+    },
+    "Androids_disponiveis": [
+      "Android 13",
+      "Android 14",
+      "Android 15"
+    ],
+    "Android_mais_recente": "Android 16",
+    "Tecnologias_suportadas": {
+      "NFC": true,
+      "WiFi": [
+        "2.4GHz",
+        "5GHz"
+      ],
+      "Rede": [
+        "4G",
+        "5G",
+        "6G"
+      ],
+      "Bluetooth": "5.0+",
+      "SIM": "Dual SIM"
+    }
+  },
+  "Hardware_C": {
+    "Softwares": [
+      "TZORIN-VS1",
+      "UZORIN-VS2",
+      "VZORIN-VS3",
+      "TZORIN-VS4",
+      "UZORIN-VS5",
+      "VZORIN-VS6",
+      "TZORIN-VS7",
+      "UZORIN-VS8",
+      "VZORIN-VS9",
+      "TZORIN-VS10"
+    ],
+    "Regioes": {
+      "India": [
+        "UZORIN-VS5",
+        "UZORIN-VS8",
+        "TZORIN-VS7"
+      ],
+      "France": [
+        "TZORIN-VS10",
+        "TZORIN-VS7",
+        "UZORIN-VS5",
+        "TZORIN-VS1",
+        "VZORIN-VS3"
+      ],
+      "Japan": [
+        "UZORIN-VS5",
+        "TZORIN-VS7",
+        "UZORIN-VS8",
+        "VZORIN-VS9",
+        "VZORIN-VS6",
+        "TZORIN-VS1",
+        "TZORIN-VS4"
+      ]
+    },
+    "Androids_disponiveis": [
+      "Android 13",
+      "Android 14",
+      "Android 15"
+    ],
+    "Android_mais_recente": "Android 16",
+    "Tecnologias_suportadas": {
+      "NFC": true,
+      "WiFi": [
+        "2.4GHz",
+        "5GHz"
+      ],
+      "Rede": [
+        "4G",
+        "5G",
+        "6G"
+      ],
+      "Bluetooth": "5.0+",
+      "SIM": "Dual SIM"
+    }
+  },
+  "Hardware_D": {
+    "Softwares": [
+      "TKALYX-VS1",
+      "UKALYX-VS2",
+      "VKALYX-VS3",
+      "TKALYX-VS4",
+      "UKALYX-VS5",
+      "VKALYX-VS6",
+      "TKALYX-VS7",
+      "UKALYX-VS8",
+      "VKALYX-VS9",
+      "TKALYX-VS10"
+    ],
+    "Regioes": {
+      "Mexico": [
+        "TKALYX-VS1",
+        "TKALYX-VS10",
+        "UKALYX-VS5",
+        "VKALYX-VS6",
+        "VKALYX-VS3"
+      ],
+      "Australia": [
+        "UKALYX-VS8",
+        "TKALYX-VS7",
+        "TKALYX-VS4",
+        "VKALYX-VS6",
+        "UKALYX-VS5"
+      ],
+      "Canada": [
+        "VKALYX-VS6",
+        "TKALYX-VS7",
+        "VKALYX-VS9",
+        "TKALYX-VS10"
+      ]
+    },
+    "Androids_disponiveis": [
+      "Android 13",
+      "Android 14",
+      "Android 15"
+    ],
+    "Android_mais_recente": "Android 16",
+    "Tecnologias_suportadas": {
+      "NFC": true,
+      "WiFi": [
+        "2.4GHz",
+        "5GHz"
+      ],
+      "Rede": [
+        "4G",
+        "5G",
+        "6G"
+      ],
+      "Bluetooth": "5.0+",
+      "SIM": "Dual SIM"
+    }
+  },
+  "Hardware_E": {
+    "Softwares": [
+      "QFERON-VS1",
+      "RFERON-VS2",
+      "SFERON-VS3",
+      "QFERON-VS4",
+      "RFERON-VS5",
+      "SFERON-VS6",
+      "QFERON-VS7"
+    ],
+    "Regioes": {
+      "South Africa": [
+        "RFERON-VS2",
+        "SFERON-VS6",
+        "QFERON-VS1",
+        "SFERON-VS3",
+        "QFERON-VS7",
+        "QFERON-VS4"
+      ],
+      "Japan": [
+        "QFERON-VS7",
+        "RFERON-VS2",
+        "SFERON-VS6",
+        "QFERON-VS4",
+        "RFERON-VS5",
+        "QFERON-VS1"
+      ],
+      "USA": [
+        "QFERON-VS7",
+        "SFERON-VS3",
+        "RFERON-VS5"
+      ]
+    },
+    "Androids_disponiveis": [
+      "Android 10",
+      "Android 11",
+      "Android 12"
+    ],
+    "Android_mais_recente": "Android 12",
+    "Tecnologias_suportadas": {
+      "NFC": true,
+      "WiFi": [
+        "2.4GHz"
+      ],
+      "Rede": [
+        "3G",
+        "4G"
+      ],
+      "Bluetooth": "4.0",
+      "SIM": [
+        "Single SIM (fisico)",
+        "sem eSIM"
+      ]
+    }
+  }
+}
