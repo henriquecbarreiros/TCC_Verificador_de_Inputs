@@ -133,7 +133,7 @@ INPUT:
 
 INSTRUÇÕES:
 1. Para cada campo no input, verifique no banco
-2. Seja rigoroso nas comparações
+2. Seja rigoroso nas comparações e consulte apenas o banco de dados.
 3. Mostre valores reais do banco em caso de FAIL"""
             }
         ],
