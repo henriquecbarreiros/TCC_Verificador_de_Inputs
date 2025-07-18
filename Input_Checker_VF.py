@@ -1,65 +1,70 @@
-import tkinter as tk
-from tkinter import filedialog, messagebox, scrolledtext
-import requests
-import os
-import hashlib
-import json
-from dotenv import load_dotenv
-from datetime import datetime, timedelta
+import tkinter as tk #importa bliblioteca tkinter, responsavel pela parte grafica
+from tkinter import filedialog, messagebox, scrolledtext #Importação dos componentes do Tkinter para interface gráfica
+import requests #Permite fazer requisições HTTP para comunicação com com a DeepSeek.
+import os #Fornece acesso a funções do sistema operacional
+import hashlib # Utilizado para criar hashes (resumos únicos) de dados, útil para identificar arquivos ou entradas de forma segura.
+import json # Permite ler, escrever e manipular dados no formato JSON
+from dotenv import load_dotenv # Carrega variáveis de ambiente do arquivo .env, protegendo a chave de API.
+from datetime import datetime, timedelta # Fornece ferramentas para manipular datas e horários.
 
 # Carrega variáveis do .env
 load_dotenv()
-deepseek_api_key = os.getenv("DEEPSEEK_API_KEY")
-LAST_DIR_FILE = "last_dir.json"
+deepseek_api_key = os.getenv("DEEPSEEK_API_KEY") #Local onde a API key está localizada
+LAST_DIR_FILE = "last_dir.json" #Local onde está localizado a ultima pasta aberta do programa
 
-def carregar_ultimo_dir():
+# Abre o arquivo que armazena o último diretório usado, lê os dados em formato JSON
+# e verifica se a pasta ainda existe. Se sim, retorna esse diretório, caso não, retorna o diretório atual
+def carregar_ultimo_dir(): 
     try:
-        with open(LAST_DIR_FILE, "r") as f:
-            data = json.load(f)
-            if os.path.isdir(data.get("last_dir", "")):  # Verifica se a pasta ainda existe
-                return data["last_dir"]
-            return os.getcwd()
+        with open(LAST_DIR_FILE, "r") as f: 
+            data = json.load(f)  
+            if os.path.isdir(data.get("last_dir", "")):  
+                return data["last_dir"] 
+            return os.getcwd() 
     except Exception as e:
-        print(f"Erro ao carregar último diretório: {e}")
-        return os.getcwd()
+        print(f"Erro ao carregar último diretório: {e}") # Em caso de erro, exibe uma mensagem
+        return os.getcwd() # E retorna o diretório atual
 
 def salvar_ultimo_dir(caminho):
     """Salva o último diretório acessado."""
-    with open(LAST_DIR_FILE, "w") as f:
-        json.dump({"last_dir": os.path.dirname(caminho)}, f)
+    with open(LAST_DIR_FILE, "w") as f: # Abre o arquivo para escrita
+        json.dump({"last_dir": os.path.dirname(caminho)}, f) # Salva o caminho da pasta do arquivo selecionado em formato JSON
 
 # Cache de resultados com expiração
 class ResultCache:
-    def __init__(self, max_size=100, ttl_hours=24):
-        self.cache = {}
-        self.max_size = max_size
-        self.ttl = timedelta(hours=ttl_hours)
+    def __init__(self, max_size=100, ttl_hours=24): 
+        self.cache = {} #Dicionário para armazenar os resultados em cache
+        self.max_size = max_size  #Número máximo de itens permitidos no cache
+        self.ttl = timedelta(hours=ttl_hours) #Tempo de vida (TTL) dos itens no cache
     
     def add(self, key, value):
         if len(self.cache) >= self.max_size:
-            self.cleanup()
+            self.cleanup() #Remove o item mais antigo se o cache estiver cheio
         self.cache[key] = {
-            'value': value,
-            'timestamp': datetime.now()
+            'value': value, #Valor do resultado em cache
+            'timestamp': datetime.now() #Momento em que o item foi adicionado (para expiração)
         }
     
     def get(self, key):
-        item = self.cache.get(key)
+        item = self.cache.get(key) #Tenta recuperar o item pelo identificador
+        # Verifica se o item existe e se ainda está dentro do tempo de validade (TTL)
         if item and (datetime.now() - item['timestamp']) < self.ttl:
-            return item['value']
-        return None
+            return item['value'] # Retorna o valor do cache se estiver válido
+        return None  # Retorna None se não existir ou se já expirou
     
-    def cleanup(self):
+    def cleanup(self): # Remove o item mais antigo do cache para liberar espaço
         oldest_key = min(self.cache.keys(), key=lambda k: self.cache[k]['timestamp'])
         del self.cache[oldest_key]
 
-cache_resultados = ResultCache()
+cache_resultados = ResultCache() # Instancia a classe ResultCache para uso no programa
 
 # Gera um hash único baseado no input
 def gerar_hash(input_str):
     return hashlib.sha256(input_str.encode()).hexdigest()
 
-def validar_estrutura_input(input_json):
+#A função garante que o arquivo de entrada tenha todas as informações essenciais antes de prosseguir com a análise. 
+# Se faltar algum campo importante, ela interrompe o processo e avisa qual campo está faltando, evitando que a validação continue com dados incompletos.
+def validar_estrutura_input(input_json): 
     campos_obrigatorios = [
         "Hardware", "Software", "Regiao_Execucao",
         "Versao_Android", "WiFi", "NFC", "Bluetooth", "SIM", "Rede"
@@ -68,6 +73,8 @@ def validar_estrutura_input(input_json):
         if campo not in input_json:
             raise ValueError(f"Campo obrigatório faltando: {campo}")
 
+# A função verifica se o software informado pode ser usado em determinada região,
+# de acordo com o banco de dados do hardware. Isso garante que testes e validações respeitem regras regionais de compatibilidade.
 def validar_relacao_software_regiao(banco, hardware, software, regiao):
     hw_data = banco.get(hardware, {})
     regioes = hw_data.get("Regioes", {})
@@ -82,7 +89,7 @@ def validar_relacao_software_regiao(banco, hardware, software, regiao):
         return regiao in regioes
     return False
 
-# Função para análise via DeepSeek
+# Função para análise via DeepSeek, onde são passadas as instruções necessárias para a IA verificar os inputs
 def analisar_deepseek(banco_de_dados, input_de_teste):
     headers = {
         "Authorization": f"Bearer {deepseek_api_key}",
@@ -108,6 +115,19 @@ RESULTADOS:
 - BLUETOOTH: PASS/FAIL [valor no input]
 - SIM: PASS/FAIL [valor no input]
 - REDE: PASS/FAIL [valor no input]
+
+Exemplo de RESULTADOS:
+
+RESULTADOS:
+- HARDWARE: PASS [Hardware_A]
+- SOFTWARE: PASS [TREVAN-VS7]
+- RELAÇÃO_SOFTWARE_REGIAO: PASS [TREVAN-VS7 está na lista da região Germany]
+- VERSAO_ANDROID: PASS [Android 15]
+- WIFI: PASS [2.4GHz]
+- NFC: PASS [true]
+- BLUETOOTH: FAIL [4.0] → Valor esperado: "5.0+"
+- SIM: FAIL [Single SIM] → Valor esperado: "Dual SIM"
+- REDE: FAIL [8G] → Valores esperados: ["4G", "5G", "6G"]
 
 REGRAS RÍGIDAS:
 1. Para RELAÇÃO_SOFTWARE_REGIAO:
@@ -200,7 +220,7 @@ def executar_analise():
     output_text.insert(tk.END, resultado)
     status_bar.config(text="Pronto")
 
-def escolher_arquivo():
+def escolher_arquivo(): #Função para selecionar o arquivo .json
     # Carrega o último diretório usado
     ultimo_dir = carregar_ultimo_dir()
     
@@ -315,4 +335,50 @@ status_bar = tk.Label(
 )
 status_bar.pack(fill=tk.X, side=tk.BOTTOM)
 
-janela.mainloop()
+janela.mainloop() # Programa entra no loop principal esperando interações do usuário.
+
+# Fluxo de funcionamento do Validador de Testes Android com DeepSeek
+"""
+1. Abertura da interface gráfica
+    - O programa inicializa a interface usando Tkinter.
+    - Carrega o último diretório acessado (carregar_ultimo_dir), caso exista, para facilitar a seleção do arquivo de input.
+
+2. Seleção do arquivo de input (.json)
+    - Usuário clica no botão "Procurar".
+    - Chama a função escolher_arquivo():
+        - Abre a janela para selecionar arquivo (filedialog).
+        - Usa carregar_ultimo_dir() para abrir na última pasta acessada.
+        - Se o usuário escolher um arquivo:
+            - Salva o caminho selecionado (input_path_var.set).
+            - Atualiza o arquivo com o último diretório usando salvar_ultimo_dir().
+
+3. Execução da análise
+    - Usuário clica no botão "Executar Análise".
+    - Chama a função executar_analise():
+        - Obtém o caminho do arquivo de input selecionado.
+        - Abre e lê o arquivo JSON de entrada.
+        - Chama validar_estrutura_input(input_json):
+            - Verifica se todos os campos obrigatórios estão presentes no arquivo de entrada.
+            - Se faltar algum campo, interrompe o processo e exibe mensagem de erro.
+        - Abre e lê o banco de dados técnico (software_db.json). Caso não abra, um popup aparece
+
+4. Validação local da relação hardware/software/região
+    - Chama validar_relacao_software_regiao(banco, hardware, software, regiao):
+        - Verifica se o hardware, software e região informados são compatíveis no banco de dados.
+        - Se não for válido, exibe aviso e interrompe a análise.
+
+5. Checagem de cache
+    - Gera um hash exclusivo para a combinação hardware, software e região (gerar_hash).
+    - Verifica se já existe resultado em cache (cache_resultados.get(chave)):
+        - Se existir, exibe o resultado armazenado na interface.
+        - Se não existir:
+            - Chama analisar_deepseek(banco, input_teste):
+                - Monta o prompt com regras e dados do banco/input.
+                - Envia para a API do DeepSeek usando requests.post().
+                - Recebe o resultado da análise IA.
+            - Salva o resultado no cache (cache_resultados.add).
+
+6. Exibição do resultado
+    - Exibe o resultado detalhado (PASS/FAIL por campo, valores esperados e recebidos) na área de resultados da interface.
+    - Atualiza a barra de status para "Pronto".
+"""
